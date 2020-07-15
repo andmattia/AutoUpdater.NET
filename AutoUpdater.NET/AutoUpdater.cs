@@ -156,6 +156,10 @@ namespace AutoUpdaterDotNET
         /// </summary>
         public static bool Synchronous = false;
 
+        /// <summary>
+        ///  Set this to false if you want to not run after update complete.
+        /// </summary>
+        public static bool RestartAfterUpdate = true;
         ///<summary>
         ///     Set this to true if you want to ignore previously assigned Remind Later and Skip settings. It will also hide Remind Later and Skip buttons.
         /// </summary>
@@ -246,6 +250,9 @@ namespace AutoUpdaterDotNET
         /// <param name="myAssembly">Assembly to use for version checking.</param>
         public static void Start(string appCast, Assembly myAssembly = null)
         {
+#if DEBUG
+          //  Debugger.Launch();
+#endif
             try
             {
                 ServicePointManager.SecurityProtocol |= (SecurityProtocolType) 192 |

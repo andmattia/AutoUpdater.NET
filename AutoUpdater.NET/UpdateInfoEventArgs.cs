@@ -73,6 +73,13 @@ namespace AutoUpdaterDotNET
         public CheckSum CheckSum { get; set; }
 
         /// <summary>
+        ///     Checksum of the update file.
+        /// </summary>
+        [XmlElement("autorestart")]
+        public bool AutoReStart { get; set; }
+
+
+        /// <summary>
         ///     Hash algorithm that generated the checksum provided in the XML file.
         /// </summary>
         public string HashingAlgorithm { get; set; }

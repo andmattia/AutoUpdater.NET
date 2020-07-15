@@ -138,13 +138,51 @@ namespace AutoUpdaterDotNET
                 };
 
                 var extension = Path.GetExtension(tempPath);
+                string executablePath = Process.GetCurrentProcess().MainModule.FileName;
+
                 if (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase))
                 {
                     string installerPath = Path.Combine(Path.GetDirectoryName(tempPath), "ZipExtractor.exe");
 
                     File.WriteAllBytes(installerPath, Resources.ZipExtractor);
 
-                    string executablePath = Process.GetCurrentProcess().MainModule.FileName;
+                    
+                    string extractionPath = Path.GetDirectoryName(executablePath);
+
+                    if (!string.IsNullOrEmpty(AutoUpdater.InstallationPath) &&
+                        Directory.Exists(AutoUpdater.InstallationPath))
+                    {
+                        extractionPath = AutoUpdater.InstallationPath;
+                    }
+
+                    StringBuilder arguments =
+                        new StringBuilder($"\"{tempPath}\" \"{extractionPath}\" \"{executablePath}\"");
+                    string[] args = Environment.GetCommandLineArgs();
+                    for (int i = 1; i < args.Length; i++)
+                    {
+                        if (i.Equals(1))
+                        {
+                            arguments.Append(" \"");
+                        }
+
+                        arguments.Append(args[i]);
+                        arguments.Append(i.Equals(args.Length - 1) ? "\"" : " ");
+                    }
+
+                    processStartInfo = new ProcessStartInfo
+                    {
+                        FileName = installerPath,
+                        UseShellExecute = true,
+                        Arguments = arguments.ToString()
+                    };
+                }
+                else if (extension.Equals(".exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    string installerPath = Path.Combine(Path.GetDirectoryName(tempPath), "InnoSetupWrap.exe");
+
+                    File.WriteAllBytes(installerPath, Resources.InnoSetupWrap);
+
+                    
                     string extractionPath = Path.GetDirectoryName(executablePath);
 
                     if (!string.IsNullOrEmpty(AutoUpdater.InstallationPath) &&
@@ -187,6 +225,7 @@ namespace AutoUpdaterDotNET
                     }
                 }
 
+                
                 if (AutoUpdater.RunUpdateAsAdmin)
                 {
                     processStartInfo.Verb = "runas";
@@ -194,7 +233,31 @@ namespace AutoUpdaterDotNET
 
                 try
                 {
-                    Process.Start(processStartInfo);
+                    
+
+                    Process pExecute = new Process()
+                    {
+
+                        StartInfo = processStartInfo
+                    };
+
+                    //if (AutoUpdater.RestartAfterUpdate)
+                    //{
+                    //    //processStartInfo.Arguments += " /RESTARTAPPLICATIONS" ;
+
+                    //    pExecute.EnableRaisingEvents = true;
+                        
+                    //    // Eventhandler wich fires when exited
+                    //    pExecute.Exited += new EventHandler((s,e)=> myProcess_Exited(s,e,executablePath));
+                    //    // Starts the process
+                        
+                    //}
+
+
+                    pExecute.Start();
+                    //pExecute.WaitForExit();
+
+
                 }
                 catch (Win32Exception exception)
                 {
@@ -217,6 +280,14 @@ namespace AutoUpdaterDotNET
             {
                 Close();
             }
+        }
+
+        private void myProcess_Exited(object sender, EventArgs e, string path)
+        {
+            ProcessStartInfo processReStartInfo = new ProcessStartInfo(path);
+            Process.Start(processReStartInfo);
+
+            //Close();
         }
 
         private static string BytesToString(long byteCount)

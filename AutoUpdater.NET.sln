@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdater.NET", "AutoUpdater.NET\AutoUpdater.NET.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
 	ProjectSection(ProjectDependencies) = postProject
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722} = {AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}
 		{91DE558C-6DB8-429B-A069-C0491DCFF15B} = {91DE558C-6DB8-429B-A069-C0491DCFF15B}
 	EndProjectSection
 EndProject
@@ -19,8 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		LICENSE = LICENSE
+		nuget\nuget.exe = nuget\nuget.exe
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnoSetupWrap", "InnoSetupWrap\InnoSetupWrap.csproj", "{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +84,18 @@ Global
 		{9AEE4F21-5ED5-4C7E-9249-8A680123B5E3}.Release-NET35|Any CPU.Build.0 = Release|Any CPU
 		{9AEE4F21-5ED5-4C7E-9249-8A680123B5E3}.Release-NET40|Any CPU.ActiveCfg = Release|Any CPU
 		{9AEE4F21-5ED5-4C7E-9249-8A680123B5E3}.Release-NET40|Any CPU.Build.0 = Release|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Debug-NET35|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Debug-NET35|Any CPU.Build.0 = Debug|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Debug-NET40|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Debug-NET40|Any CPU.Build.0 = Debug|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Release-NET35|Any CPU.ActiveCfg = Release|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Release-NET35|Any CPU.Build.0 = Release|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Release-NET40|Any CPU.ActiveCfg = Release|Any CPU
+		{AA05FF2E-40B5-4FF3-8F05-B0D19BECA722}.Release-NET40|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

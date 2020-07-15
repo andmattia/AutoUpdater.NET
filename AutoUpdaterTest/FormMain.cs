@@ -120,8 +120,8 @@ namespace AutoUpdaterTest
 
             //Uncomment following line if you want to check for update synchronously.
             //AutoUpdater.Synchronous = true;
-
-            AutoUpdater.Start("https://rbsoft.org/updates/AutoUpdaterTest.xml");
+            AutoUpdater.HttpUserAgent = "Clay-DataLoader";
+            AutoUpdater.Start("http://localhost:17233/dataloaderclient");
         }
 
         private void AutoUpdater_ApplicationExitEvent()
